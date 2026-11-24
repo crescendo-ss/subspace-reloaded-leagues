@@ -1,0 +1,36 @@
+{
+  "name": "subspace-reloaded-leagues",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "deepspace.gg, a Subspace league coordinator: sign-ups, drafts, schedules, standings and playoffs",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env scripts/start.ts --dev",
+    "build": "next build",
+    "start": "node --env-file-if-exists=.env scripts/start.ts",
+    "db": "docker compose up -d --wait",
+    "db:reset-demo": "docker compose exec -T postgres psql -U deepspace -d deepspace -c \"DROP SCHEMA IF EXISTS demo CASCADE\"",
+    "demo": "node scripts/start.ts --demo --dev",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "npm run test:unit && npm run test:http",
+    "test:unit": "node --test test/competition.test.js test/reloaded.test.js test/audit.test.js test/urls.test.js test/deepspace.test.js test/import.test.js test/stats.test.js test/store.test.js test/commands.test.js",
+    "test:http": "npm run build && node --test test/http.test.js"
+  },
+  "dependencies": {
+    "next": "^16.4.6",
+    "pg": "^8.23.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.9.3"
+  }
+}

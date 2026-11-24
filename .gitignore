@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.DS_Store
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
+# Local Railway project links, infrastructure, and exported plans
+/.railway/
+/railway-plan.json

@@ -1,0 +1,20 @@
+# A local Postgres for the demo and the tests: `docker compose up -d`.
+# The demo and each test run keep to their own schema inside the one database.
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: deepspace
+      POSTGRES_PASSWORD: deepspace
+      POSTGRES_DB: deepspace
+    ports:
+      - '127.0.0.1:5435:5432'
+    volumes:
+      - deepspace-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U deepspace -d deepspace']
+      interval: 2s
+      timeout: 2s
+      retries: 20
+volumes:
+  deepspace-postgres:
